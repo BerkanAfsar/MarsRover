@@ -217,19 +217,32 @@ namespace RoverNavigator
         private void MoveTheRover(List<Rover> roverList)
         {
             if (roverList.Last().Heading.Equals(GeographicDirections.N.ToString()))
-                roverList.Last().Y++;
+            {
+                int yCoordinate = roverList.Last().Y;
+
+                var outOfBound = yCoordinate + 1 > YUpperRight ? throw new RoverOutOfBoundException("The Rover out of the bound.") : roverList.Last().Y++;
+            }
 
             if (roverList.Last().Heading.Equals(GeographicDirections.E.ToString()))
-                roverList.Last().X++;
+            {
+                int xCoordinate = roverList.Last().X;
+
+                var outOfBound = xCoordinate + 1 > XUpperRight ? throw new RoverOutOfBoundException("The Rover out of the bound.") : roverList.Last().X++;
+            }
 
             if (roverList.Last().Heading.Equals(GeographicDirections.S.ToString()))
-                roverList.Last().Y--;
+            {
+                int yCoordinate = roverList.Last().Y;
+
+                var outOfBound = yCoordinate - 1 < 0 ? throw new RoverOutOfBoundException("The Rover out of the bound.") : roverList.Last().Y--;
+            }
 
             if (roverList.Last().Heading.Equals(GeographicDirections.W.ToString()))
-                roverList.Last().X--;
+            {
+                int xCoordinate = roverList.Last().X;
 
-            if (roverList.Last().X > XUpperRight || roverList.Last().X < 0 || roverList.Last().Y > YUpperRight || roverList.Last().Y < 0)
-                throw new RoverOutOfBoundException("The Rover out of the bound.");
+                var outOfBound = xCoordinate - 1 < 0 ? throw new RoverOutOfBoundException("The Rover out of the bound.") : roverList.Last().X--;
+            }
         }
     }
 }
